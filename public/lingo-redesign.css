@@ -509,3 +509,34 @@ body { background: var(--color-bg); }
 .sidebar__nav-item.lingo-utility-nav { display:none !important; }
 .lingo-quick-links { display:flex; flex-wrap:wrap; gap:.6rem; margin:0 0 1rem; }
 .lingo-settings-import { margin:.75rem 0 0; }
+
+/* Tablet portrait layout fixes: keep the desktop visual language without clipping. */
+@media (min-width: 768px) and (max-width: 1100px) {
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+  .app-shell, .app-shell.is-collapsed {
+    width: 100%; max-width: 100%; min-width: 0;
+    grid-template-columns: var(--sidebar-width-compact, 84px) minmax(0, 1fr) !important;
+  }
+  .sidebar { position: sticky; left: auto; top: 0; width: 100%; min-width: 0; }
+  .main, .view, .view__inner { min-width: 0; max-width: 100%; }
+  .view__inner { width: 100%; padding-left: clamp(14px, 2.4vw, 26px) !important; padding-right: clamp(14px, 2.4vw, 26px) !important; }
+  .view--dashboard .view__inner { grid-template-columns: minmax(0, 1fr); }
+  .lr-dash { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .lr-dash > *, .lr-prog > *, .lr-tests > *, .module-grid > *, .level-grid > *, .tests-list > *, .library-grid > * { min-width: 0; }
+  .lr-hero, .lr-continue, .lr-progress, .lr-plan, .lr-widget--word, .lr-panel--7, .lr-panel--5 { grid-column: span 12 !important; }
+  .lr-widget--pomo, .lr-widget--clock { grid-column: span 6 !important; }
+  .lr-kpi:nth-child(n) { grid-column: span 6 !important; }
+  .lr-continue__title { max-width: 100%; overflow-wrap: anywhere; }
+  .lr-testrow { grid-template-columns: 2.25rem minmax(0, 1fr) auto !important; }
+  .lr-testrow > * { min-width: 0; }
+  .lr-flash { max-width: 100%; }
+  img, video, canvas, svg { max-width: 100%; }
+}
+
+@media (max-width: 900px) {
+  .app-shell, .app-shell.is-collapsed { min-width: 0; width: 100%; max-width: 100%; }
+  .main, .view, .view__inner { min-width: 0; }
+  .view__inner { overflow-wrap: anywhere; }
+  .card, .lr-card, .lr-widget, .lr-panel { min-width: 0; max-width: 100%; }
+  input, select, textarea, button { max-width: 100%; }
+}
